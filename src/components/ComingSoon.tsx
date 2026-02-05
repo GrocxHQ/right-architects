@@ -8,9 +8,19 @@ export default function ComingSoon() {
           Right Architects
         </p>
 
-        <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight mb-6 leading-[1.05] font-semibold [font-family:var(--font-doto)]">
-          Under (re)construction
-        </h1>
+        <h1 className="
+            text-[34px] 
+            sm:text-5xl 
+            md:text-6xl 
+            lg:text-7xl 
+            tracking-tight 
+            mb-6 
+            leading-[1.05] 
+            font-semibold 
+            [font-family:var(--font-doto)]
+            ">
+            Under (re)construction
+            </h1>
 
         <p className="text-base md:text-lg text-white/80 mb-12 leading-relaxed [font-family:var(--font-unbounded)]
 ">
