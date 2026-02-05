@@ -1,17 +1,29 @@
 @import "tailwindcss";
 
+/* ---------------- THEME TOKENS ---------------- */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* Tailwind v4 theme bridge */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Base UI fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Project typography system */
+  --font-doto: var(--font-doto);
+  --font-cormorant: var(--font-cormorant);
+  --font-unbounded: var(--font-unbounded);
+
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +31,11 @@
   }
 }
 
+/* Global base styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
