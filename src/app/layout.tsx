@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Cormorant_Garamond } from 'next/font/google';
+import ComingSoon from "@/components/ComingSoon"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const cormorant = Cormorant_Garamond({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700']
 });
 
 const geistMono = Geist_Mono({
@@ -27,7 +34,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {process.env.NEXT_PUBLIC_SITE_LIVE === "false" ? (
+          <ComingSoon />
+        ) : (
+          children
+        )}
       </body>
     </html>
   );
