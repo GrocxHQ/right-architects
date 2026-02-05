@@ -5,7 +5,7 @@ export default function ComingSoon() {
 
         <p className="text-[11px] tracking-[0.35em] mb-8 text-white/70 font-light [font-family:var(--font-unbounded)]
  uppercase">
-          Hang tight
+          Right Architects
         </p>
 
         <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight mb-6 leading-[1.05] font-semibold [font-family:var(--font-doto)]">
