@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
+import Header from "@/components/Header";
 
 type Project = {
   title: string;
@@ -41,17 +42,23 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   return (
-    <main className="bg-white">
+    <main className="bg-black text-white min-h-screen">
+
+      {/* Global Navigation */}
+      <Header />
+
+      {/* Offset from navbar */}
+      <div className="h-32 md:h-40" />
 
       {/* MAIN GRID */}
-      <section className="mx-auto max-w-[1600px] px-12 py-20 grid grid-cols-[1fr_420px] gap-16">
+      <section className="mx-auto max-w-[1600px] px-8 md:px-12 pb-24 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16">
 
         {/* LEFT: IMAGE VIEWER */}
         <div>
 
           {/* Hero Image */}
           {project.mainImage?.asset && (
-            <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
+            <div className="relative aspect-[16/10] bg-neutral-900 overflow-hidden">
               <Image
                 src={urlFor(project.mainImage).width(2000).height(1300).url()}
                 alt={project.title}
@@ -61,10 +68,10 @@ export default async function ProjectPage({
               />
 
               {/* Arrows (visual only for now) */}
-              <button className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-3xl">
+              <button className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 text-3xl">
                 ‹
               </button>
-              <button className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-3xl">
+              <button className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 text-3xl">
                 ›
               </button>
             </div>
@@ -78,7 +85,7 @@ export default async function ProjectPage({
                 .map((image, index) => (
                   <div
                     key={index}
-                    className="relative h-24 w-36 flex-shrink-0 bg-gray-100 overflow-hidden"
+                    className="relative h-24 w-36 flex-shrink-0 bg-neutral-900 overflow-hidden"
                   >
                     <Image
                       src={urlFor(image).width(400).height(300).url()}
@@ -93,34 +100,31 @@ export default async function ProjectPage({
         </div>
 
         {/* RIGHT: PROJECT INFO */}
-        <aside className="text-sm text-gray-600 leading-relaxed">
+        <aside className="text-sm text-neutral-400 leading-relaxed">
 
-          <h1 className="font-serif text-2xl text-gray-900 mb-6">
+          <h1 className="font-serif text-2xl text-neutral-100 mb-6">
             {project.title}
           </h1>
 
-          <p className="uppercase tracking-widest text-gray-400 mb-4">
-            Six Families – One Community
+          <p className="uppercase tracking-widest text-neutral-500 mb-4">
+            {project.category}
           </p>
 
           <div className="space-y-4">
-            <p>
-              Six residences come together along a shared cobble-paved path,
-              binding aspirations while maintaining privacy and individuality.
-            </p>
+            {project.location && (
+              <p>
+                {project.location}
+              </p>
+            )}
 
-            <p>
-              The design encourages community living while respecting each
-              household’s unique identity through spatial sequencing and
-              landscape buffers.
-            </p>
-
-            <p>
-              Awarded Silver Leaf – IIA Kerala Awards (Unbuilt Category).
-            </p>
+            {project.year && (
+              <p>
+                {project.year}
+              </p>
+            )}
           </div>
 
-          <div className="mt-16 text-gray-400 uppercase tracking-widest text-xs">
+          <div className="mt-16 text-neutral-500 uppercase tracking-widest text-xs">
             Next Project →
           </div>
         </aside>

@@ -2,76 +2,37 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function Header({ loaded = true }: { loaded?: boolean }) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const leftLinks = [
-    { label: "Work", href: "/projects" },
-    { label: "Process", href: "/process" },
+  const navLinks = [
+    { label: "home", href: "/" },
+    { label: "projects", href: "/projects" },
+    { label: "profile", href: "/profile" },
+    { label: "contact", href: "/contact" },
   ];
 
-  const rightLinks = [
-    { label: "Profile", href: "/profile" },
-    { label: "Contact", href: "/contact" },
-  ];
-
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
   return (
     <>
       {/* DESKTOP + TABLET HEADER */}
       <header
-        className={`absolute top-10 left-0 right-0 z-50 hidden md:flex justify-center
+        className={`absolute top-0 left-0 right-0 z-50 hidden md:flex items-center px-8 lg:px-12 py-6
         transition-opacity duration-700 delay-300
         ${loaded ? "opacity-100" : "opacity-0"}`}
       >
-        <nav className="flex items-center gap-5 md:gap-5 lg:gap-6 text-xs uppercase tracking-[0.25em] text-white/70">
-
-          {leftLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-white transition">
-              {link.label}
-            </Link>
-          ))}
-
-          {/* Center logo */}
-          <Link
-            href="/"
-            className="relative w-44 h-16 md:w-56 md:h-20 lg:w-80 lg:h-28 mx-1 md:mx-2 lg:mx-3"
-          >
-            <Image
-              src="/right-logo.png"
-              alt="RIGHT Architects"
-              fill
-              priority
-              className="object-contain"
-            />
-          </Link>
-
-          {rightLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-white transition">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </header>
-
-      {/* MOBILE HEADER */}
-      <header
-        className={`absolute top-6 left-0 right-0 z-[120] flex md:hidden items-center justify-between px-6
-        transition-opacity duration-700 delay-300
-        ${loaded ? "opacity-100" : "opacity-0"}`}
-      >
-        {/* Mobile logo */}
-        <Link href="/" className="relative w-52 h-16">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="relative w-[300px] h-[110px] md:w-[420px] md:h-[140px] lg:w-[520px] lg:h-[160px] flex-shrink-0"
+        >
           <Image
             src="/right-logo.png"
             alt="RIGHT Architects"
@@ -81,58 +42,88 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
           />
         </Link>
 
-        {/* HAMBURGER / X BUTTON */}
-        <button
-          onClick={() => setOpen((prev) => !prev)}
-          className="relative w-14 h-14 bg-black rounded-full flex items-center justify-center"
-        >
-          <div className="relative w-6 h-6">
+        {/* Nav */}
+        <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lg:text-[18px] lowercase font-medium tracking-normal lg:tracking-[0.35em] md:-mt-8 lg:-mt-[72px]">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
 
-            {/* Top */}
-            <span
-              className={`absolute left-0 h-[2px] w-full bg-white transition-all duration-300 ${
-                open ? "top-3 rotate-45" : "top-1"
-              }`}
-            />
-
-            {/* Middle */}
-            <span
-              className={`absolute left-0 top-3 h-[2px] w-full bg-white transition-all duration-300 ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-
-            {/* Bottom */}
-            <span
-              className={`absolute left-0 h-[2px] w-full bg-white transition-all duration-300 ${
-                open ? "top-3 -rotate-45" : "top-5"
-              }`}
-            />
-
-          </div>
-        </button>
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`transition-colors duration-300 ${
+                  isActive ? "text-black" : "text-black/50 hover:text-black"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
       </header>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* MOBILE HEADER */}
+<header
+  className={`absolute top-0 left-0 right-0 z-[120] flex md:hidden items-center justify-between px-4 py-5
+  transition-opacity duration-700 delay-300
+  ${loaded ? "opacity-100" : "opacity-0"}`}
+>
+  <Link
+    href="/"
+    className="relative w-[160px] h-[60px] scale-[1.8] origin-left mt-4"
+  >
+    <Image
+      src="/right-logo.png"
+      alt="RIGHT Architects"
+      fill
+      priority
+      className="object-contain object-left"
+    />
+  </Link>
+
+  {/* Hamburger */}
+  <button
+    onClick={() => setOpen((prev) => !prev)}
+    className="relative w-10 h-10 rounded-full border border-black/20 flex items-center justify-center bg-white/60 backdrop-blur-sm mr-4"
+  >
+    <div className="relative w-5 h-4">
+      <span
+        className={`absolute left-0 h-[1.5px] w-full bg-black/80 transition-all duration-300 ${
+          open ? "top-2 rotate-45" : "top-0"
+        }`}
+      />
+      <span
+        className={`absolute left-0 top-2 h-[1.5px] w-full bg-black/80 transition-all duration-300 ${
+          open ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <span
+        className={`absolute left-0 h-[1.5px] w-full bg-black/80 transition-all duration-300 ${
+          open ? "top-2 -rotate-45" : "top-4"
+        }`}
+      />
+    </div>
+  </button>
+</header>
+
+      {/* MOBILE MENU */}
       <div
-        className={`fixed inset-0 z-[110] bg-black/95 backdrop-blur-sm
-        flex flex-col items-center justify-center gap-10 text-sm uppercase tracking-[0.3em]
+        className={`fixed inset-0 z-[110] bg-white/95 backdrop-blur-sm
+        flex flex-col items-center justify-center gap-10 text-lg lowercase tracking-[0.02em] font-medium
         transition-all duration-500 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <Link href="/projects" onClick={() => setOpen(false)} className="text-white">
-          Work
-        </Link>
-        <Link href="/process" onClick={() => setOpen(false)} className="text-white">
-          Process
-        </Link>
-        <Link href="/profile" onClick={() => setOpen(false)} className="text-white">
-          Profile
-        </Link>
-        <Link href="/contact" onClick={() => setOpen(false)} className="text-white">
-          Contact
-        </Link>
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setOpen(false)}
+            className="text-black/60 hover:text-black transition-colors duration-300"
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
     </>
   );
