@@ -25,7 +25,6 @@ export default function ProjectStage({ projects = [] }: ProjectStageProps) {
     "/hero/structure1.png",
     "/hero/structure2.png",
     "/hero/structure3.png",
-    "/hero/structure4.png",
   ];
 
   /* Page fade-in */
@@ -57,16 +56,25 @@ export default function ProjectStage({ projects = [] }: ProjectStageProps) {
 
       {/* Centered Image Slider */}
       <div className="flex items-center justify-center h-full relative">
-        {images.map((src, index) => (
-          <img
-            key={src}
-            src={src}
-            alt="Structure"
-            className={`absolute md:w-[60vw] lg:w-[50vw] object-contain transition-opacity duration-1000 ${
-              index === current ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
+        {images.map((src, index) => {
+  const isLarge = index === 0 || index === 2 || index === 3;
+
+  return (
+    <img
+      key={src}
+      src={src}
+      alt="Structure"
+      className={`absolute object-contain transition-opacity duration-1000
+      ${
+        isLarge
+          ? "md:w-[70vw] lg:w-[60vw]"
+          : "md:w-[60vw] lg:w-[50vw]"
+      }
+      ${index === current ? "opacity-100" : "opacity-0"}
+      `}
+    />
+  );
+})}
       </div>
     </main>
   );
