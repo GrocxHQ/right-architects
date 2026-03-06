@@ -1,14 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
 import { urlFor } from "@/sanity/image";
-import Header from "@/components/Header";
 
 type Project = {
   title: string;
   year?: number;
   location?: string;
   category?: string;
+  description?: string;
   mainImage?: any;
   gallery?: any[];
 };
@@ -23,6 +24,7 @@ async function getProject(slug: string): Promise<Project | null> {
       year,
       location,
       category,
+      description,
       mainImage,
       gallery
     }
@@ -41,93 +43,65 @@ export default async function ProjectPage({
 
   if (!project) notFound();
 
+  const images = [
+    project.mainImage,
+    ...(project.gallery || []),
+  ].filter((img) => img?.asset);
+
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="min-h-screen bg-white text-neutral-800">
 
-      {/* Global Navigation */}
-      <Header />
+      {/* Back button */}
+      <div className="px-8 pt-10">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 text-xs lowercase tracking-[0.12em] px-5 py-2 rounded-full bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition"
+        >
+          ← back
+        </Link>
+      </div>
 
-      {/* Offset from navbar */}
-      <div className="h-32 md:h-40" />
+      {/* Content */}
+      <section className="mx-auto max-w-6xl px-6 pb-32">
 
-      {/* MAIN GRID */}
-      <section className="mx-auto max-w-[1600px] px-8 md:px-12 pb-24 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16">
-
-        {/* LEFT: IMAGE VIEWER */}
-        <div>
-
-          {/* Hero Image */}
-          {project.mainImage?.asset && (
-            <div className="relative aspect-[16/10] bg-neutral-900 overflow-hidden">
-              <Image
-                src={urlFor(project.mainImage).width(2000).height(1300).url()}
-                alt={project.title}
-                fill
-                priority
-                className="object-cover"
-              />
-
-              {/* Arrows (visual only for now) */}
-              <button className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 text-3xl">
-                ‹
-              </button>
-              <button className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 text-3xl">
-                ›
-              </button>
-            </div>
-          )}
-
-          {/* Thumbnails */}
-          {project.gallery && project.gallery.length > 0 && (
-            <div className="mt-6 flex gap-4 overflow-x-auto pb-2">
-              {project.gallery
-                .filter((img) => img?.asset)
-                .map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative h-24 w-36 flex-shrink-0 bg-neutral-900 overflow-hidden"
-                  >
-                    <Image
-                      src={urlFor(image).width(400).height(300).url()}
-                      alt={`${project.title} thumbnail ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-            </div>
-          )}
+        {/* Meta */}
+        <div className="flex justify-center gap-6 text-xs text-neutral-500 mt-8 mb-2 lowercase tracking-[0.12em]">
+          {project.year && <span>{project.year}</span>}
+          {project.location && <span>{project.location}</span>}
         </div>
 
-        {/* RIGHT: PROJECT INFO */}
-        <aside className="text-sm text-neutral-400 leading-relaxed">
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-12 lowercase tracking-[0.05em] text-neutral-900">
+          {project.title}
+        </h1>
 
-          <h1 className="font-serif text-2xl text-neutral-100 mb-6">
-            {project.title}
-          </h1>
+        {/* Images + Description */}
+        <div className="space-y-14">
 
-          <p className="uppercase tracking-widest text-neutral-500 mb-4">
-            {project.category}
-          </p>
+          {images.map((image, index) => (
+            <div key={index}>
 
-          <div className="space-y-4">
-            {project.location && (
-              <p>
-                {project.location}
-              </p>
-            )}
+              {/* Image */}
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[20px] bg-neutral-100">
+                <Image
+                  src={urlFor(image).width(2200).height(1400).url()}
+                  alt={`${project.title} image ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
-            {project.year && (
-              <p>
-                {project.year}
-              </p>
-            )}
-          </div>
+              {/* Description under first image */}
+              {index === 0 && project.description && (
+                <p className="mt-6 text-sm leading-relaxed text-neutral-600 w-full text-center md:text-left">
+                  {project.description}
+                </p>
+              )}
 
-          <div className="mt-16 text-neutral-500 uppercase tracking-widest text-xs">
-            Next Project →
-          </div>
-        </aside>
+            </div>
+          ))}
+
+        </div>
 
       </section>
 

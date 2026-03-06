@@ -43,7 +43,7 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
         </Link>
 
         {/* Nav */}
-        <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lg:text-[18px] lowercase font-medium tracking-normal lg:tracking-[0.35em] md:-mt-8 lg:-mt-[72px]">
+        <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lg:text-[18px] lowercase font-medium tracking-normal lg:tracking-[0.40em] md:-mt-8 lg:-mt-[72px]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 

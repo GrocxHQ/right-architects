@@ -32,55 +32,57 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      
-      {/* Global Header */}
+    <main className="min-h-screen bg-[#f3f3f3] text-black">
+
+      {/* Header */}
       <Header />
 
-      {/* Spatial offset from navbar */}
-      <div className="h-40 md:h-56" />
+      {/* Offset below navbar */}
+      <div className="h-32 md:h-40" />
 
-      {/* Projects Grid */}
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-20 px-8 pb-32 md:grid-cols-2">
+      {/* Grid container */}
+      <section className="mx-auto max-w-[1800px] px-6 pb-24">
 
-        {projects.map((project) => (
-          <Link
-            key={project._id}
-            href={`/projects/${project.slug.current}`}
-            className="group"
-          >
-            <div className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
 
-              {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900">
-                {project.mainImage?.asset && (
-                  <Image
-                    src={urlFor(project.mainImage).width(1200).height(900).url()}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                )}
+          {projects.map((project) => (
+            <Link
+              key={project._id}
+              href={`/projects/${project.slug.current}`}
+              className="group"
+            >
+              <div className="relative overflow-hidden rounded-2xl bg-neutral-200 shadow-sm">
+
+                {/* Square image */}
+                <div className="relative w-full aspect-square">
+                  {project.mainImage?.asset && (
+                    <Image
+                      src={urlFor(project.mainImage)
+                        .width(1000)
+                        .height(1000)
+                        .url()}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                </div>
+
+                {/* Bottom gradient overlay */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/90 via-white/60 to-transparent" />
+
+                {/* Project title */}
+                <div className="absolute bottom-5 left-6">
+                  <h2 className="text-lg font-semibold tracking-tight">
+                    {project.title}
+                  </h2>
+                </div>
+
               </div>
+            </Link>
+          ))}
 
-              {/* Meta */}
-              <div className="space-y-1">
-                <h2 className="text-lg font-medium">
-                  {project.title}
-                </h2>
-
-                <p className="text-sm text-neutral-400">
-                  {project.location} · {project.year}
-                </p>
-
-                <p className="text-xs uppercase tracking-widest text-neutral-500">
-                  {project.category}
-                </p>
-              </div>
-
-            </div>
-          </Link>
-        ))}
+        </div>
 
       </section>
 
