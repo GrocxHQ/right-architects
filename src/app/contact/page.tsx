@@ -7,16 +7,16 @@ export default function ContactPage() {
       <Header />
 
       {/* Top spacing */}
-      <div className="h-32 md:h-40" />
+      <div className="h-32 md:h-36 lg:h-56" />
 
       {/* Heading */}
       <section className="mx-auto max-w-4xl px-6 text-center">
 
-        <h1 className="text-3xl md:text-4xl tracking-[0.28em] font-semibold lowercase mb-10">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl tracking-[0.28em] font-semibold lowercase mb-8 md:mb-10">
           contact
         </h1>
 
-        <p className="text-sm text-neutral-600 leading-relaxed max-w-xl mx-auto text-justify md:text-center lg:text-center">
+        <p className="text-[13px] md:text-sm text-neutral-600 leading-relaxed max-w-xl mx-auto text-justify md:text-center lg:text-center">
           If you are planning a project or would like to collaborate,
           feel free to reach out. We would be happy to discuss ideas
           and help transform your vision into meaningful spaces.
@@ -26,70 +26,99 @@ export default function ContactPage() {
 
 
       {/* Contact Info Grid */}
-      <section className="mx-auto max-w-5xl px-6 mt-20">
+<section className="mx-auto max-w-5xl px-6 mt-20">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-14 gap-x-24 text-center">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-y-14 gap-x-24 text-center">
 
-          {/* Phone */}
-          <div className="space-y-2">
-            <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
-              phone
-            </p>
-            <p className="text-sm text-neutral-700">
-              +91 7034256463
-            </p>
-            <p className="text-sm text-neutral-700">
-              +91 7306256463
-            </p>
-          </div>
+    {/* Phone */}
+    <div className="space-y-2">
+      <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
+        phone
+      </p>
 
-          {/* Email */}
-          <div className="space-y-2">
-            <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
-              email
-            </p>
-            <p className="text-sm text-neutral-700">
-              rightarchitects@gmail.com
-            </p>
-          </div>
+      <a
+        href="tel:+917034256463"
+        className="block text-sm text-neutral-700 md:pointer-events-none"
+      >
+        +91 7034256463
+      </a>
 
-          {/* Instagram */}
-          <div className="space-y-2">
-            <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
-              instagram
-            </p>
-            <p className="text-sm text-neutral-700">
-              @rightarchitects
-            </p>
-            <p className="text-sm text-neutral-700">
-              @right.furnitures
-            </p>
-          </div>
+      <a
+        href="tel:+917306256463"
+        className="block text-sm text-neutral-700 md:pointer-events-none"
+      >
+        +91 7306256463
+      </a>
+    </div>
 
-          {/* Location */}
-          <div className="space-y-2">
-            <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
-              location
-            </p>
-            <p className="text-sm text-neutral-700">
-              pookkottumpadam, nilambur
-            </p>
-            <p className="text-sm text-neutral-700">
-              kerala, india 679332
-            </p>
-          </div>
+    {/* Email */}
+    <div className="space-y-2">
+      <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
+        email
+      </p>
 
-        </div>
+      <a
+        href="mailto:info@therightarchitects.com"
+        className="block text-sm text-neutral-700 hover:underline"
+      >
+        info@therightarchitects.com
+      </a>
+    </div>
 
-      </section>
+    {/* Instagram */}
+    <div className="space-y-2">
+      <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
+        instagram
+      </p>
+
+      <a
+        href="https://www.instagram.com/right.architects"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block text-sm text-neutral-700 hover:underline"
+      >
+        @right.architects
+      </a>
+
+      <a
+        href="https://instagram.com/right.furnitures"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block text-sm text-neutral-700 hover:underline"
+      >
+        @right.furnitures
+      </a>
+    </div>
+
+    {/* Location */}
+    <div className="space-y-2">
+      <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
+        location
+      </p>
+      <p className="text-sm text-neutral-700">
+        pookkottumpadam, nilambur
+      </p>
+      <p className="text-sm text-neutral-700">
+        kerala, india 679332
+      </p>
+    </div>
+
+  </div>
+
+</section>
 
 
-      {/* Map Section (visual difference) */}
-      <section className="mx-auto max-w-6xl px-6 mt-24 pb-32">
+      {/* Open Map Section */}
+      <section className="mx-auto max-w-4xl px-6 mt-24 pb-32 text-center">
 
-        <div className="w-full h-[420px] bg-neutral-200 rounded-lg flex items-center justify-center text-neutral-500 text-sm">
-          map placeholder
-        </div>
+        <a
+          href="https://maps.google.com/?q=RIGHT+ARCHITECTS+Nilambur"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm lowercase tracking-wide border border-neutral-300 px-6 py-3 hover:bg-black hover:text-white transition-colors"
+        >
+          open location in google maps →
+        </a>
 
       </section>
 

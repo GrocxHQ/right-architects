@@ -79,132 +79,114 @@ export default function ProfilePage() {
 
       </section>
 
-      {/* Services Section */}
-      <section className="mx-auto max-w-7xl px-6 md:px-10 lg:px-6 mt-24 pb-32">
+{/* Services Section */}
+<section className="mx-auto max-w-7xl px-6 md:px-10 lg:px-6 mt-24 pb-32">
 
-        <div className="grid md:grid-cols-3 gap-16 text-center lg:text-left">
+  <div className="grid md:grid-cols-3 gap-12 md:gap-16 text-center lg:text-left">
 
-          {/* Service 1 */}
-          <div className="space-y-4">
+    {/* Service 1 */}
+    <div className="space-y-3">
 
-            <div className="flex justify-center lg:justify-start">
-              <div className="w-10 h-10 border border-neutral-300 rounded-md flex items-center justify-center">
-                ✏️
-              </div>
-            </div>
+      <h3 className="lowercase tracking-[0.2em] text-[11px] md:text-xs font-semibold text-neutral-500">
+        architecture
+      </h3>
 
-            <h3 className="lowercase tracking-[0.2em] text-xs font-semibold text-neutral-500">
-              architecture
-            </h3>
+      <p className="text-[13px] md:text-sm text-neutral-600 leading-relaxed">
+        Residential and architectural design focused on thoughtful
+        spatial planning, contextual design, and lasting aesthetics.
+      </p>
 
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              Residential and architectural design focused on thoughtful
-              spatial planning, contextual design, and lasting aesthetics.
-            </p>
+    </div>
 
-          </div>
+    {/* Service 2 */}
+    <div className="space-y-3">
 
-          {/* Service 2 */}
-          <div className="space-y-4">
+      <h3 className="lowercase tracking-[0.2em] text-[11px] md:text-xs font-semibold text-neutral-500">
+        interiors & greenscape
+      </h3>
 
-            <div className="flex justify-center lg:justify-start">
-              <div className="w-10 h-10 border border-neutral-300 rounded-md flex items-center justify-center">
-                🧭
-              </div>
-            </div>
+      <p className="text-[13px] md:text-sm text-neutral-600 leading-relaxed">
+        Interior design and landscape concepts that create balanced,
+        functional environments with natural elements and spatial
+        harmony.
+      </p>
 
-            <h3 className="lowercase tracking-[0.2em] text-xs font-semibold text-neutral-500">
-              interiors & greenscape
-            </h3>
+    </div>
 
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              Interior design and landscape concepts that create balanced,
-              functional environments with natural elements and spatial
-              harmony.
-            </p>
+    {/* Service 3 */}
+    <div className="space-y-3">
 
-          </div>
+      <h3 className="lowercase tracking-[0.2em] text-[11px] md:text-xs font-semibold text-neutral-500">
+        furniture design
+      </h3>
 
-          {/* Service 3 */}
-          <div className="space-y-4">
+      <p className="text-[13px] md:text-sm text-neutral-600 leading-relaxed">
+        Custom furniture and design pieces developed through our
+        furniture brand right furnitures, blending craftsmanship
+        with contemporary design.
+      </p>
 
-            <div className="flex justify-center lg:justify-start">
-              <div className="w-10 h-10 border border-neutral-300 rounded-md flex items-center justify-center">
-                💡
-              </div>
-            </div>
+    </div>
 
-            <h3 className="lowercase tracking-[0.2em] text-xs font-semibold text-neutral-500">
-              furniture design
-            </h3>
+  </div>
 
-            <p className="text-sm text-neutral-600 leading-relaxed">
-              Custom furniture and design pieces developed through our
-              furniture brand <strong>@right.furnitures</strong>, blending
-              craftsmanship with contemporary design.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
+</section>
 
       {/* ---------------- TEAM SECTION ---------------- */}
 
-      <section className="mx-auto max-w-7xl px-6 md:px-10 lg:px-6 pb-32">
+<section className="mx-auto max-w-7xl px-6 md:px-8 lg:px-6 pb-20 md:pb-24 lg:pb-32">
 
-        {/* Heading */}
-        <div className="mb-10">
+  {/* Heading */}
+  <div className="mb-6 md:mb-8">
 
-          <p className="text-xs tracking-[0.25em] text-neutral-400 lowercase">
-            our team
+    <p className="text-[10px] md:text-xs tracking-[0.25em] text-neutral-400 lowercase">
+      our team
+    </p>
+
+    <h2 className="text-xl md:text-2xl lg:text-3xl lowercase tracking-[0.18em] mt-1 md:mt-2">
+      meet the minds
+    </h2>
+
+  </div>
+
+  {/* Carousel */}
+  <div className="flex gap-4 md:gap-5 lg:gap-6 overflow-x-scroll scrollbar-hide pb-3 md:pb-4 snap-x snap-mandatory scroll-smooth">
+
+    {team.map((member, index) => (
+      <div
+        key={index}
+        className="min-w-[160px] md:min-w-[200px] lg:min-w-[240px] snap-start"
+      >
+
+        <div className="relative aspect-[3/4] overflow-hidden rounded-lg md:rounded-xl bg-neutral-100">
+
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover grayscale"
+          />
+
+        </div>
+
+        <div className="mt-3 md:mt-4">
+
+          <p className="text-xs md:text-sm lowercase text-neutral-800">
+            {member.name}
           </p>
 
-          <h2 className="text-2xl md:text-3xl lowercase tracking-[0.18em] mt-2">
-            meet the minds
-          </h2>
+          <p className="text-[11px] md:text-xs text-neutral-500 mt-1">
+            {member.role}
+          </p>
 
         </div>
 
-        {/* Carousel */}
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory">
+      </div>
+    ))}
 
-          {team.map((member, index) => (
-            <div
-              key={index}
-              className="min-w-[220px] md:min-w-[240px] snap-start"
-            >
+  </div>
 
-              <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-neutral-100">
-
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover grayscale"
-                />
-
-              </div>
-
-              <div className="mt-4">
-
-                <p className="text-sm lowercase text-neutral-800">
-                  {member.name}
-                </p>
-
-                <p className="text-xs text-neutral-500 mt-1">
-                  {member.role}
-                </p>
-
-              </div>
-
-            </div>
-          ))}
-
-        </div>
-
-      </section>
+</section>
 
     </main>
   );

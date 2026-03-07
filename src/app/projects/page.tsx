@@ -43,14 +43,14 @@ export default async function ProjectsPage() {
       {/* Grid container */}
       <section className="mx-auto max-w-[1800px] px-6 pb-24">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
 
           {projects.map((project) => (
             <Link
-              key={project._id}
-              href={`/projects/${project.slug.current}`}
-              className="group"
-            >
+  key={project._id}
+  href={`/projects/${project.slug.current}`}
+  className="group"
+>
               <div className="relative overflow-hidden rounded-2xl bg-neutral-200 shadow-sm">
 
                 {/* Square image */}
@@ -69,11 +69,11 @@ export default async function ProjectsPage() {
                 </div>
 
                 {/* Bottom gradient overlay */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/90 via-white/60 to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 md:h-20 lg:h-24 bg-gradient-to-t from-white/90 via-white/60 to-transparent" />
 
                 {/* Project title */}
                 <div className="absolute bottom-5 left-6">
-                  <h2 className="text-lg font-semibold tracking-tight">
+                  <h2 className="text-sm md:text-base lg:text-lg font-light tracking-tight">
                     {project.title}
                   </h2>
                 </div>
