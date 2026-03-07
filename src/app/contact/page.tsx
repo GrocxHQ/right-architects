@@ -65,10 +65,10 @@ export default function ContactPage() {
       </a>
     </div>
 
-    {/* Instagram */}
+    {/* Social */}
     <div className="space-y-2">
       <p className="text-xs tracking-[0.2em] lowercase text-neutral-500">
-        instagram
+        social
       </p>
 
       <a
@@ -77,7 +77,7 @@ export default function ContactPage() {
         rel="noopener noreferrer"
         className="block text-sm text-neutral-700 hover:underline"
       >
-        @right.architects
+        instagram — right.architects
       </a>
 
       <a
@@ -86,7 +86,16 @@ export default function ContactPage() {
         rel="noopener noreferrer"
         className="block text-sm text-neutral-700 hover:underline"
       >
-        @right.furnitures
+        instagram — right.furnitures
+      </a>
+
+      <a
+        href="https://www.facebook.com/people/RIGHT-Architects/61578335670503/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block text-sm text-neutral-700 hover:underline"
+      >
+        facebook — right architects
       </a>
     </div>
 
@@ -99,7 +108,10 @@ export default function ContactPage() {
         pookkottumpadam, nilambur
       </p>
       <p className="text-sm text-neutral-700">
-        kerala, india 679332
+        kerala, india
+      </p>
+      <p className="text-sm text-neutral-700">
+        679332
       </p>
     </div>
 
