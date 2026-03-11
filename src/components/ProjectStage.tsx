@@ -5,9 +5,17 @@ import Header from "@/components/Header";
 
 export default function ProjectStage() {
   const [loaded, setLoaded] = useState(false);
+  const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const images = [
+    "/hero/structure.png",
+    "/hero/structure1.png",
+    "/hero/structure2.png",
+    "/hero/structure3.png",
+  ];
+
+  const filmImages = [
     "/hero/structure.png",
     "/hero/structure1.png",
     "/hero/structure2.png",
@@ -21,26 +29,28 @@ export default function ProjectStage() {
   ];
 
   const widths = [
-    "30vw",
+    "26vw", // structure — smaller
+    "32vw",
+    "48vw",
+    "40vw",
+    "26vw", // structure — smaller
     "32vw",
     "40vw",
-    "40vw",
-    "30vw",
-    "32vw",
-    "40vw",
-    "40vw",
-    "30vw",
+    "48vw",
+    "26vw", // structure — smaller
     "32vw",
   ];
 
+  // Per-image mobile width
+  const mobileWidths = [
+    "60vw", // structure — smaller on mobile
+    "75vw",
+    "85vw",
+    "85vw",
+  ];
+
   useEffect(() => {
-    const unique = [
-      "/hero/structure.png",
-      "/hero/structure1.png",
-      "/hero/structure2.png",
-      "/hero/structure3.png",
-    ];
-    unique.forEach((src) => {
+    images.forEach((src) => {
       const img = new Image();
       img.src = src;
     });
@@ -49,6 +59,13 @@ export default function ProjectStage() {
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 300);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3500);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -83,7 +100,6 @@ export default function ProjectStage() {
       }
 
       const pxOffset = (currentOffset / 100) * window.innerWidth;
-
       track.style.transition = `transform ${stepDuration}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
       track.style.transform = `translateX(-${pxOffset}px)`;
 
@@ -92,7 +108,6 @@ export default function ProjectStage() {
     };
 
     timeoutId = setTimeout(move, pauseDuration);
-
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -104,13 +119,30 @@ export default function ProjectStage() {
     >
       <Header loaded={loaded} />
 
-      <div className="flex items-center h-full overflow-hidden">
+      {/* Mobile — fade slider */}
+      <div className="flex md:hidden items-center justify-center h-full relative">
+        {images.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt="Structure"
+            className="absolute object-contain transition-opacity duration-1000"
+            style={{
+              width: mobileWidths[index],
+              opacity: index === current ? 0.65 : 0,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Desktop — film strip */}
+      <div className="hidden md:flex items-center h-full overflow-hidden">
         <div
           ref={trackRef}
           className="flex items-center"
           style={{ width: "max-content", willChange: "transform" }}
         >
-          {images.map((src, index) => (
+          {filmImages.map((src, index) => (
             <div
               key={index}
               style={{
@@ -129,7 +161,7 @@ export default function ProjectStage() {
                   width: widths[index],
                   objectFit: "contain",
                   display: "block",
-                  opacity: 0.7,
+                  opacity: 0.65,
                 }}
               />
             </div>
