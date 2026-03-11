@@ -6,6 +6,6 @@ export default async function HomePage() {
   const data = await client.fetch(homepageQuery);
 
   return (
-    <ProjectStage projects={data?.featuredProjects || []} />
+    <ProjectStage />
   );
 }
