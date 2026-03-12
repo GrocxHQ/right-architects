@@ -24,14 +24,13 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
     <>
       {/* DESKTOP HEADER */}
       <header
-        className={`absolute top-0 left-0 right-0 z-50 hidden lg:flex items-center px-8 lg:px-12 py-6
+        className={`absolute top-0 left-0 right-0 z-50 hidden lg:flex items-center px-8 lg:px-12 py-0
         transition-opacity duration-700 delay-300
         ${loaded ? "opacity-100" : "opacity-0"}`}
       >
-        {/* Logo */}
         <Link
           href="/"
-          className="relative w-[340px] h-[130px] md:w-[480px] md:h-[170px] lg:w-[600px] lg:h-[200px] flex-shrink-0"
+          className="relative w-[480px] h-[170px] md:w-[620px] md:h-[210px] lg:w-[780px] lg:h-[260px] flex-shrink-0 -mt-6"
         >
           <Image
             src="/right-logo.png"
@@ -42,11 +41,9 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
           />
         </Link>
 
-        {/* Nav */}
         <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lowercase font-light tracking-normal lg:tracking-[0.40em] lg:-mt-[72px]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
-
             return (
               <Link
                 key={link.href}
@@ -64,15 +61,14 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
 
       {/* MOBILE + TABLET HEADER */}
       <header
-  className={`absolute top-0 left-0 right-0 z-[120] flex lg:hidden items-center justify-between px-4 pt-0 pb-5
-  transition-opacity duration-700 delay-300
-  ${loaded ? "opacity-100" : "opacity-0"}`}
->
-        {/* Logo */}
+        className={`absolute top-0 left-0 right-0 z-[120] flex lg:hidden items-center justify-between px-4 py-0
+        transition-opacity duration-700 delay-300
+        ${loaded ? "opacity-100" : "opacity-0"}`}
+      >
         <Link
-  href="/"
-  className="relative w-[340px] h-[130px] md:w-[460px] md:h-[170px] origin-left mt-4"
->
+          href="/"
+          className="relative w-[480px] h-[180px] md:w-[580px] md:h-[210px] origin-left -mt-4"
+        >
           <Image
             src="/right-logo.png"
             alt="RIGHT Architects"
@@ -82,12 +78,11 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
           />
         </Link>
 
-        {/* Hamburger */}
         <button
-  onClick={() => setOpen((prev) => !prev)}
-  className="relative w-10 h-10 rounded-full border border-black/20 flex items-center justify-center bg-white/60 backdrop-blur-sm mr-4 -mt-5 md:-mt-7"
->
-          <div className="relative w-5 h-4">
+          onClick={() => setOpen((prev) => !prev)}
+          className="relative w-12 h-12 md:w-10 md:h-10 aspect-square flex-shrink-0 rounded-full border border-black/20 flex items-center justify-center bg-white/60 backdrop-blur-sm mr-4 -mt-8 md:-mt-10"
+        >
+          <div className="relative w-6 h-5 md:w-5 md:h-4">
             <span
               className={`absolute left-0 h-[1.5px] w-full bg-black/80 transition-all duration-300 ${
                 open ? "top-2 rotate-45" : "top-0"
