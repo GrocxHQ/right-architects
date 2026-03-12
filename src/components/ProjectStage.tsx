@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import Header from "@/components/Header";
 
 export default function ProjectStage() {
   const [loaded, setLoaded] = useState(false);
   const [current, setCurrent] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLAnchorElement>(null);
 
   const images = [
     "/hero/structure.png",
@@ -29,24 +30,13 @@ export default function ProjectStage() {
   ];
 
   const widths = [
-    "26vw", // structure — smaller
-    "32vw",
-    "48vw",
-    "40vw",
-    "26vw", // structure — smaller
-    "32vw",
-    "40vw",
-    "48vw",
-    "26vw", // structure — smaller
-    "32vw",
+    "18vw", "22vw", "32vw", "28vw",
+    "18vw", "22vw", "28vw", "32vw",
+    "18vw", "22vw",
   ];
 
-  // Per-image mobile width
   const mobileWidths = [
-    "60vw", // structure — smaller on mobile
-    "75vw",
-    "85vw",
-    "85vw",
+    "60vw", "75vw", "85vw", "85vw",
   ];
 
   useEffect(() => {
@@ -119,28 +109,30 @@ export default function ProjectStage() {
     >
       <Header loaded={loaded} />
 
-      {/* Mobile — fade slider */}
+      {/* Mobile — fade slider, each image is a link */}
       <div className="flex md:hidden items-center justify-center h-full relative">
         {images.map((src, index) => (
-          <img
-            key={src}
-            src={src}
-            alt="Structure"
-            className="absolute object-contain transition-opacity duration-1000"
-            style={{
-              width: mobileWidths[index],
-              opacity: index === current ? 0.65 : 0,
-            }}
-          />
+          <Link key={src} href="/projects" className="absolute">
+            <img
+              src={src}
+              alt="Structure"
+              className="object-contain transition-opacity duration-1000"
+              style={{
+                width: mobileWidths[index],
+                opacity: index === current ? 0.45 : 0,
+              }}
+            />
+          </Link>
         ))}
       </div>
 
       {/* Desktop — film strip */}
       <div className="hidden md:flex items-center h-full overflow-hidden">
-        <div
+        <Link
+          href="/projects"
           ref={trackRef}
-          className="flex items-center"
-          style={{ width: "max-content", willChange: "transform" }}
+          className="flex items-center cursor-pointer"
+          style={{ width: "max-content", willChange: "transform", gap: "6vw" }}
         >
           {filmImages.map((src, index) => (
             <div
@@ -161,12 +153,12 @@ export default function ProjectStage() {
                   width: widths[index],
                   objectFit: "contain",
                   display: "block",
-                  opacity: 0.65,
+                  opacity: 0.45,
                 }}
               />
             </div>
           ))}
-        </div>
+        </Link>
       </div>
     </main>
   );
