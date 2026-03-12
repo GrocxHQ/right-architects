@@ -24,13 +24,13 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
     <>
       {/* DESKTOP HEADER */}
       <header
-        className={`absolute top-0 left-0 right-0 z-50 hidden lg:flex items-center px-8 lg:px-12 py-0
+        className={`absolute top-0 left-0 right-0 z-50 hidden lg:flex items-center px-8 lg:px-12 pt-8 pb-0
         transition-opacity duration-700 delay-300
         ${loaded ? "opacity-100" : "opacity-0"}`}
       >
         <Link
           href="/"
-          className="relative w-[480px] h-[170px] md:w-[620px] md:h-[210px] lg:w-[780px] lg:h-[260px] flex-shrink-0 -mt-6"
+          className="relative w-[180px] h-[70px] md:w-[220px] md:h-[85px] lg:w-[280px] lg:h-[105px] flex-shrink-0 -mt-2 ml-4"
         >
           <Image
             src="/right-logo.png"
@@ -41,7 +41,7 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
           />
         </Link>
 
-        <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lowercase font-light tracking-normal lg:tracking-[0.40em] lg:-mt-[72px]">
+        <nav className="flex items-center gap-8 lg:gap-14 ml-auto text-[15px] lowercase font-light tracking-normal lg:tracking-[0.40em] lg:-mt-[20px]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -61,13 +61,13 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
 
       {/* MOBILE + TABLET HEADER */}
       <header
-        className={`absolute top-0 left-0 right-0 z-[120] flex lg:hidden items-center justify-between px-4 py-0
+        className={`absolute top-0 left-0 right-0 z-[120] flex lg:hidden items-center justify-between px-4 pt-8 pb-0
         transition-opacity duration-700 delay-300
         ${loaded ? "opacity-100" : "opacity-0"}`}
       >
         <Link
           href="/"
-          className="relative w-[480px] h-[180px] md:w-[580px] md:h-[210px] origin-left -mt-4"
+          className="relative w-[200px] h-[80px] md:w-[260px] md:h-[100px] origin-left mt-1 ml-3"
         >
           <Image
             src="/right-logo.png"
@@ -80,9 +80,9 @@ export default function Header({ loaded = true }: { loaded?: boolean }) {
 
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className="relative w-12 h-12 md:w-10 md:h-10 aspect-square flex-shrink-0 rounded-full border border-black/20 flex items-center justify-center bg-white/60 backdrop-blur-sm mr-4 -mt-8 md:-mt-10"
+          className="relative w-12 h-12 md:w-14 md:h-14 aspect-square flex-shrink-0 rounded-full border border-black/20 flex items-center justify-center bg-white/60 backdrop-blur-sm mr-4 mt-1"
         >
-          <div className="relative w-6 h-5 md:w-5 md:h-4">
+          <div className="relative w-6 h-5 md:w-7 md:h-6">
             <span
               className={`absolute left-0 h-[1.5px] w-full bg-black/80 transition-all duration-300 ${
                 open ? "top-2 rotate-45" : "top-0"
